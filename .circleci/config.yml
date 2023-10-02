@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/suumo_spider
+    working_directory: ~/gitpk
     docker:
       - image: circleci/python:3.10
     steps:

@@ -8,19 +8,18 @@ def get_requires(**kwargs) -> List[str]:
         return txt.splitlines()
 
 
-# DOC: https://docs.python.org/ja/3/distutils/setupscript.html
 setup(
-    name="name",
-    version="2022.06.24",
-    description="Describe any descriptions",
+    name="gitpk",
+    version="2023.10.02",
+    description="A CLI tool to clone a Git repo, remove the .git directory, and zip the content.",
     author="rmc8",
     author_email="k@rmc-8.com",
-    url="https://github.com/rmc8/py_template_repository",
-    packages=["src"],
+    url="https://github.com/rmc8/gitpk",
+    packages=["gitpk"],
     install_requires=get_requires(),
-    # entry_points={
-    #    "console_scripts": [
-    #         "pyt = pyt.__main__:main",
-    #     ]
-    # }
+    entry_points={
+        "console_scripts": [
+            "gitpk = gitpk.__init__:clone_and_zip",
+        ]
+    }
 )
