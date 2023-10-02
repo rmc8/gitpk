@@ -45,5 +45,9 @@ class GitPK:
         shutil.rmtree(repo_name)
 
 
-if __name__ == '__main__':
+def main():
     fire.Fire(GitPK)
+
+
+if __name__ == "__main__":
+    main()

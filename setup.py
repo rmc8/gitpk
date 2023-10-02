@@ -19,7 +19,7 @@ setup(
     install_requires=get_requires(),
     entry_points={
         "console_scripts": [
-            "gitpk = gitpk.__init__:clone_and_zip",
+            "gitpk = gitpk.__init__:main",
         ]
     }
 )
