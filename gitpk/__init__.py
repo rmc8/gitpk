@@ -30,23 +30,21 @@ def run_command(command: List[str]):
         return
 
 
-class GitPK:
-    def __call__(self, repo_url: str, output_zip_name: Optional[str] = None):
-        if not validate_repo_url(repo_url):
-            raise InvalidRepoURL(
-                f"The provided URL '{repo_url}' does not seem to be a valid git repository URL.")
-
-        repo_name = repo_url.split("/")[-1].replace(".git", "")
-        if output_zip_name is None:
-            output_zip_name: str = repo_name
-        run_command(["git", "clone", repo_url])
-        shutil.rmtree(os.path.join(repo_name, ".git"))
-        shutil.make_archive(output_zip_name, 'zip', repo_name)
-        shutil.rmtree(repo_name)
+def clone_and_pack(repo_url: str, output_zip_name: Optional[str] = None):
+    if not validate_repo_url(repo_url):
+        raise InvalidRepoURL(
+            f"The provided URL '{repo_url}' does not seem to be a valid git repository URL.")
+    repo_name = repo_url.split("/")[-1].replace(".git", "")
+    if output_zip_name is None:
+        output_zip_name: str = repo_name
+    run_command(["git", "clone", repo_url])
+    shutil.rmtree(os.path.join(repo_name, ".git"))
+    shutil.make_archive(output_zip_name, 'zip', repo_name)
+    shutil.rmtree(repo_name)
 
 
 def main():
-    fire.Fire(GitPK)
+    fire.Fire(clone_and_pack)
 
 
 if __name__ == "__main__":
