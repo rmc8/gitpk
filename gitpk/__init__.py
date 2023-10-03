@@ -1,5 +1,6 @@
 import os
 import re
+import time
 import shutil
 import subprocess
 from typing import Optional, List
@@ -38,8 +39,13 @@ def clone_and_pack(repo_url: str, output_zip_name: Optional[str] = None):
     if output_zip_name is None:
         output_zip_name: str = repo_name
     run_command(["git", "clone", repo_url])
-    shutil.rmtree(os.path.join(repo_name, ".git"))
-    shutil.make_archive(output_zip_name, 'zip', repo_name)
+    time.sleep(3)
+    try:
+        shutil.rmtree(os.path.join(repo_name, ".git"))
+    except PermissionError as e:
+        print(e)
+        
+    shutil.make_archive(output_zip_name, "zip", repo_name)
     shutil.rmtree(repo_name)
 
 
